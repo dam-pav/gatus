@@ -2,12 +2,6 @@ name: publish-release
 on:
   release:
     types: [published]
-  workflow_dispatch:
-    inputs:
-      tag:
-        description: Existing Git tag to build and publish (e.g. v5.0.0-dam-pav.1)
-        required: true
-        type: string
 jobs:
   publish-release:
     name: publish-release
@@ -17,7 +11,7 @@ jobs:
       packages: write
     timeout-minutes: 240
     env:
-      RELEASE: ${{ github.event.release.tag_name || inputs.tag }}
+      RELEASE: ${{ github.event.release.tag_name }}
     steps:
       - uses: actions/checkout@v7
         with:
