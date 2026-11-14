@@ -248,6 +248,31 @@ subdirectories are merged like so:
 
 If you want to test it locally, see [Docker](#docker).
 
+### YAML configuration editor
+
+Set `GATUS_CONFIG_EDITOR=true` and restart Gatus to enable the **Configuration** link in the dashboard,
+or open `/configuration` directly. The editor provides syntax highlighting, live validation,
+formatting, copying, and validated saves. It supports selecting individual files when
+`GATUS_CONFIG_PATH` points to a directory.
+
+The JSON Schema is generated from Gatus's Go configuration types and served at
+`/api/v1/config/editor/schema`. Unknown keys, incorrect types, malformed YAML, duplicate keys,
+and invalid durations are flagged in the editor. Before saving, the server expands environment
+variables and validates the complete merged configuration with Gatus's startup rules. The saved
+YAML retains environment variable references and comments; formatting preserves YAML comments.
+Changes on disk invalidate older drafts to prevent accidentally overwriting another edit.
+
+The editor is disabled by default because it exposes raw configuration, including credentials.
+Its API uses the existing basic/OIDC authentication. Without configured authentication, anyone
+who can reach Gatus can read and edit the configuration when the editor is enabled. Enable it
+only for trusted users, with authentication or a protected reverse proxy.
+
+The Gatus process needs write access to the configuration directory and files. Saves atomically
+replace the selected file and preserve its permission bits. For Docker, mount a writable configuration
+**directory**; individual bind-mounted files cannot be atomically replaced. The existing configuration
+watcher applies saved changes within 30 seconds; changes to ports or authentication can require
+reconnecting or signing in again. The editor does not create or delete configuration files.
+
 
 ## Configuration
 | Parameter                    | Description                                                                                                                              | Default       |

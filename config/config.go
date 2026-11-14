@@ -286,11 +286,7 @@ func walkConfigDir(path string, fn fs.WalkDirFunc) error {
 func parseAndValidateConfigBytes(yamlBytes []byte) (config *Config, err error) {
 	// Replace $$ with __GATUS_LITERAL_DOLLAR_SIGN__ to prevent os.ExpandEnv from treating "$$" as if it was an
 	// environment variable. This allows Gatus to support literal "$" in the configuration file.
-	yamlBytes = []byte(strings.ReplaceAll(string(yamlBytes), "$$", "__GATUS_LITERAL_DOLLAR_SIGN__"))
-	// Expand environment variables
-	yamlBytes = []byte(os.ExpandEnv(string(yamlBytes)))
-	// Replace __GATUS_LITERAL_DOLLAR_SIGN__ with "$" to restore the literal "$" in the configuration file
-	yamlBytes = []byte(strings.ReplaceAll(string(yamlBytes), "__GATUS_LITERAL_DOLLAR_SIGN__", "$"))
+	yamlBytes = expandConfigEnvironment(yamlBytes)
 	// Parse configuration file
 	if err = yaml.Unmarshal(yamlBytes, &config); err != nil {
 		return

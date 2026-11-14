@@ -8,6 +8,15 @@
             <p class="text-muted-foreground mt-2">{{ dashboardSubheading }}</p>
           </div>
           <div class="flex items-center gap-4">
+            <router-link
+              v-if="configEditor"
+              to="/configuration"
+              title="Configuration"
+              aria-label="Configuration"
+              class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md text-slate-900 transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring dark:text-slate-100"
+            >
+              <Settings2 class="h-5 w-5" aria-hidden="true" />
+            </router-link>
             <Button 
               variant="ghost" 
               size="icon" 
@@ -183,7 +192,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import { Activity, Timer, RefreshCw, AlertCircle, ChevronLeft, ChevronRight, ChevronDown, ChevronUp, CheckCircle } from 'lucide-vue-next'
+import { Activity, Timer, RefreshCw, AlertCircle, ChevronLeft, ChevronRight, ChevronDown, ChevronUp, CheckCircle, Settings2 } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
 import EndpointCard from '@/components/EndpointCard.vue'
 import SuiteCard from '@/components/SuiteCard.vue'
@@ -194,6 +203,10 @@ import AnnouncementBanner from '@/components/AnnouncementBanner.vue'
 import PastAnnouncements from '@/components/PastAnnouncements.vue'
 
 const props = defineProps({
+  configEditor: {
+    type: Boolean,
+    default: false
+  },
   announcements: {
     type: Array,
     default: () => []

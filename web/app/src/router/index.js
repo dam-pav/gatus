@@ -5,6 +5,11 @@ import SuiteDetails from '@/views/SuiteDetails';
 
 const routes = [
     {
+        path: '/configuration',
+        name: 'ConfigurationEditor',
+        component: () => import('@/views/ConfigurationEditor.vue')
+    },
+    {
         path: '/',
         name: 'Home',
         component: Home

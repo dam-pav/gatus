@@ -92,7 +92,7 @@
 
       <!-- Main Content -->
       <main class="relative">
-        <router-view @showTooltip="showTooltip" :announcements="announcements" />
+        <router-view @showTooltip="showTooltip" :announcements="announcements" :config-editor="Boolean(config.configEditor)" />
       </main>
 
       <!-- Footer -->

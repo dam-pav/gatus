@@ -29,6 +29,9 @@ func (handler ConfigHandler) GetConfig(c *fiber.Ctx) error {
 		"oidc":          hasOIDC,
 		"authenticated": isAuthenticated,
 	}
+	if config.EditorEnabled() {
+		response["configEditor"] = true
+	}
 	// Add announcements if available, otherwise use empty slice
 	if handler.config != nil && handler.config.Announcements != nil && len(handler.config.Announcements) > 0 {
 		response["announcements"] = handler.config.Announcements

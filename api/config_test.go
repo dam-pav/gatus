@@ -11,6 +11,7 @@ import (
 )
 
 func TestConfigHandler_ServeHTTP(t *testing.T) {
+	t.Setenv("GATUS_CONFIG_EDITOR", "false")
 	securityConfig := &security.Config{
 		OIDC: &security.OIDCConfig{
 			IssuerURL:       "https://sso.gatus.io/",
