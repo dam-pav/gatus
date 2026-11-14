@@ -255,8 +255,10 @@ onBeforeUnmount(() => {
 .dark .yaml-editor .yaml-comment { color: #94a3b8; }
 .dark .yaml-editor .cm-editor { color: #e2e8f0; background: #020617; }
 .dark .yaml-editor .cm-gutters { color: #94a3b8; background: #0f172a; border-color: #334155; }
-.dark .yaml-editor .cm-activeLine, .dark .yaml-editor .cm-activeLineGutter { background: #1e293b; }
+.dark .yaml-editor .cm-activeLine { background: rgb(148 163 184 / 10%); }
+.dark .yaml-editor .cm-activeLineGutter { background: #1e293b; }
 .dark .yaml-editor .cm-cursor { border-left-color: #e2e8f0; }
 .dark .yaml-editor .cm-tooltip { color: #e2e8f0; background: #0f172a; border-color: #475569; }
-.dark .yaml-editor .cm-selectionBackground, .dark .yaml-editor .cm-focused .cm-selectionBackground { background: #334155 !important; }
+.dark .yaml-editor .cm-selectionBackground, .dark .yaml-editor .cm-focused .cm-selectionBackground { background: #1e40af !important; }
+.dark .yaml-editor ::selection { color: #e2e8f0; }
 </style>
